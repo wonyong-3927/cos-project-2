@@ -7,7 +7,7 @@ class Algorithm:
     def get_name(self):
         return self.name
 
-    def learning(self, training_set):
+    def learning(self, dataset):
         pass
 
     def prediction(self, value):
