@@ -161,8 +161,10 @@ class AIModule:
         return self.models[name].learning(self.training[name], self.dimensions[name])
         
     def prediction(self, name, value):
-        pred = self.models[name].prediction(value)
-        self.results[name].add_data(pred)
+        pred = self.models[name].prediction(value, self.dimensions[name])
+        index = self.indexes[name]
+        logging.debug("pred in prediction(): {}".format(pred))
+        self.results[name].add_data(pred[index])
         return pred
 
 # URI: /

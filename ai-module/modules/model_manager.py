@@ -41,8 +41,8 @@ class ModelManager:
     def learning(self, dm, dimension=1):
         return self.algorithms[self.algorithm].learning(dm.get_data(), dimension)
 
-    def prediction(self, value):
-        pred = self.algorithms[self.algorithm].prediction(value)
+    def prediction(self, value, dimension=1):
+        pred = self.algorithms[self.algorithm].prediction(value, dimension)
         return pred
 
 def command_line_args():

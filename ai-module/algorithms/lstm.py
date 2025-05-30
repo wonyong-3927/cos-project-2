@@ -52,15 +52,19 @@ class Lstm(Algorithm):
 
         return self.predictor != None
 
-    def prediction(self, value):
+    def prediction(self, value, dimension=1):
         if len(self.queue) >= SEQUENCE_LENGTH:
             self.queue.pop(0)
         self.queue.append(value)
         if len(self.queue) < SEQUENCE_LENGTH:
-            return -1
+            ret = []
+            for _ in range(dimension):
+                ret.append(-1)
+            return ret
         sequence = np.array([self.queue])
         #sequence = sequence.reshape((sequence.shape[0], 1, sequence.shape[1]))
-        pred = list(self.predictor.predict(sequence))[0][0][0]
-        logging.debug("pred: {}".format(pred))
+        #pred = list(self.predictor.predict(sequence))[0][0][0]
+        pred = list(self.predictor.predict(sequence))[0][0]
+        logging.debug("pred in algorithm: {}".format(pred))
 
         return pred
