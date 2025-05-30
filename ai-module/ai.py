@@ -5,7 +5,7 @@ from modules.data_manager import DataManager
 from modules.model_manager import ModelManager
 from putils.autils import init_algorithms
 
-THRESHOLD = 0.25
+THRESHOLD = 0.20
 
 class AIModule:
     def __init__(self):
