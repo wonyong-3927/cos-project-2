@@ -4,8 +4,10 @@
 
 ## Getting started
 
-1. Download the source code by on your laptop and Raspberry Pi
-`git clone https://git.kentech.ac.kr:30002/project/project.git`
+1. Fork this repository to your profile: Then, the URL of the repo would be `https://github.com/[your ID]/cos-project-2.git`
+
+2. Download the source code by on your laptop and Raspberry Pi
+`git clone https://github.com/[your ID]/cos-project-2.git`
 
 3. Check your connectivity between your laptop and your Raspberry Pi
 
