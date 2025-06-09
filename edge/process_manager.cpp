@@ -5,77 +5,86 @@
 #include <cstring>
 #include <iostream>
 #include <ctime>
+
 using namespace std;
 
-ProcessManager::ProcessManager()
-{
-  this->num = 0;
+// 선택할 수 있는 집계 방식
+enum AggregationType {
+    AGG_AVG = 0,
+    AGG_CUSTOM = 1,
+    AGG_STATS = 2  // 예: 평균 + 표준편차 등 향후 확장용
+};
+
+// 현재 사용할 집계 방식 지정
+const AggregationType aggregationMode = AGG_AVG;
+
+ProcessManager::ProcessManager() {
+    this->num = 0;
 }
 
-void ProcessManager::init()
-{
-}
+void ProcessManager::init() {}
 
-// TODO: You should implement this function if you want to change the result of the aggregation
-uint8_t *ProcessManager::processData(DataSet *ds, int *dlen)
-{
-  uint8_t *ret, *p;
-  int num, len;
-  HouseData *house;
-  Info *info;
-  TemperatureData *tdata;
-  HumidityData *hdata;
-  PowerData *pdata;
-  char buf[BUFLEN];
-  ret = (uint8_t *)malloc(BUFLEN);
-  int tmp, min_humid, min_temp, min_power, month;
-  time_t ts;
-  struct tm *tm;
+uint8_t *ProcessManager::processData(DataSet *ds, int *dlen) {
+    uint8_t *ret, *p;
+    ret = (uint8_t *)malloc(BUFLEN);
+    memset(ret, 0, BUFLEN);
+    *dlen = 0;
+    p = ret;
 
-  tdata = ds->getTemperatureData();
-  hdata = ds->getHumidityData();
-  num = ds->getNumHouseData();
+    int num = ds->getNumHouseData();
+    HouseData *house;
+    TemperatureData *tdata = ds->getTemperatureData();
+    HumidityData *hdata = ds->getHumidityData();
+    PowerData *pdata;
+    time_t ts = ds->getTimestamp();
+    struct tm *tm = localtime(&ts);
 
-  // Example) I will give the minimum daily temperature (1 byte), the minimum daily humidity (1 byte), 
-  // the minimum power data (2 bytes), the month value (1 byte) to the network manager
-  
-  // Example) getting the minimum daily temperature
-  min_temp = (int) tdata->getMin();
+    if (aggregationMode == AGG_AVG) {
+        // 평균 온도와 습도는 getValue()로 대체
+        int avg_temp = (int)tdata->getValue();
+        int avg_humid = (int)hdata->getValue();
 
-  // Example) getting the minimum daily humidity
-  min_humid = (int) hdata->getMin();
+        // 평균 전력 계산
+        int total_power = 0;
+        for (int i = 0; i < num; i++) {
+            house = ds->getHouseData(i);
+            pdata = house->getPowerData();
+            total_power += (int)pdata->getValue();
+        }
+        int avg_power = total_power / max(1, num);  // 0으로 나눔 방지
 
-  // Example) getting the minimum power value
-  min_power = 10000;
-  for (int i=0; i<num; i++)
-  {
-    house = ds->getHouseData(i);
-    pdata = house->getPowerData();
-    tmp = (int)pdata->getValue();
+        int month = tm->tm_mon + 1;
 
-    if (tmp < min_power)
-      min_power = tmp;
-  }
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(avg_temp, p); *dlen += 1;
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(avg_humid, p); *dlen += 1;
+        VAR_TO_MEM_2BYTES_BIG_ENDIAN(avg_power, p); *dlen += 2;
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(month, p); *dlen += 1;
+    }
 
-  // Example) getting the month value from the timestamp
-  ts = ds->getTimestamp();
-  tm = localtime(&ts);
-  month = tm->tm_mon + 1;
+    else if (aggregationMode == AGG_CUSTOM) {
+        // 최대 전력, 습도 버킷, 요일 정보
+        int max_power = 0, tmp;
+        for (int i = 0; i < num; i++) {
+            house = ds->getHouseData(i);
+            pdata = house->getPowerData();
+            tmp = (int)pdata->getValue();
+            if (tmp > max_power) max_power = tmp;
+        }
 
-  // Example) initializing the memory to send to the network manager
-  memset(ret, 0, BUFLEN);
-  *dlen = 0;
-  p = ret;
+        int avg_humid = (int)hdata->getValue();
+        int humid_bucket = 0;
+        if (avg_humid < 30) humid_bucket = 0;
+        else if (avg_humid < 60) humid_bucket = 1;
+        else humid_bucket = 2;
 
-  // Example) saving the values in the memory
-  VAR_TO_MEM_1BYTE_BIG_ENDIAN(min_temp, p);
-  *dlen += 1;
-  VAR_TO_MEM_1BYTE_BIG_ENDIAN(min_humid, p);
-  *dlen += 1;
-  VAR_TO_MEM_2BYTES_BIG_ENDIAN(min_power, p);
-  *dlen += 2;
-  VAR_TO_MEM_1BYTE_BIG_ENDIAN(month, p);
-  *dlen += 1;
+        int weekday = tm->tm_wday;
 
-  return ret;
+        VAR_TO_MEM_2BYTES_BIG_ENDIAN(max_power, p); *dlen += 2;
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(humid_bucket, p); *dlen += 1;
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(weekday, p); *dlen += 1;
+    }
+
+    // 향후 AGG_STATS 등 다른 집계 방식을 여기에 추가 가능
+
+    return ret;
 }
