@@ -8,15 +8,15 @@
 
 using namespace std;
 
-// 선택할 수 있는 집계 방식
+// 집계 방식 열거형
 enum AggregationType {
     AGG_AVG = 0,
     AGG_CUSTOM = 1,
-    AGG_STATS = 2  // 예: 평균 + 표준편차 등 향후 확장용
+    AGG_COMFORT = 2  // 불쾌지수 기반 집계
 };
 
-// 현재 사용할 집계 방식 지정
-const AggregationType aggregationMode = AGG_AVG;
+// 사용할 집계 방식 선택
+const AggregationType aggregationMode = AGG_COMFORT;
 
 ProcessManager::ProcessManager() {
     this->num = 0;
@@ -39,20 +39,18 @@ uint8_t *ProcessManager::processData(DataSet *ds, int *dlen) {
     time_t ts = ds->getTimestamp();
     struct tm *tm = localtime(&ts);
 
+    // 평균값 기반 집계
     if (aggregationMode == AGG_AVG) {
-        // 평균 온도와 습도는 getValue()로 대체
         int avg_temp = (int)tdata->getValue();
         int avg_humid = (int)hdata->getValue();
 
-        // 평균 전력 계산
         int total_power = 0;
         for (int i = 0; i < num; i++) {
             house = ds->getHouseData(i);
             pdata = house->getPowerData();
             total_power += (int)pdata->getValue();
         }
-        int avg_power = total_power / max(1, num);  // 0으로 나눔 방지
-
+        int avg_power = total_power / max(1, num);
         int month = tm->tm_mon + 1;
 
         VAR_TO_MEM_1BYTE_BIG_ENDIAN(avg_temp, p); *dlen += 1;
@@ -61,8 +59,8 @@ uint8_t *ProcessManager::processData(DataSet *ds, int *dlen) {
         VAR_TO_MEM_1BYTE_BIG_ENDIAN(month, p); *dlen += 1;
     }
 
+    // 최대 전력, 습도 버킷, 요일
     else if (aggregationMode == AGG_CUSTOM) {
-        // 최대 전력, 습도 버킷, 요일 정보
         int max_power = 0, tmp;
         for (int i = 0; i < num; i++) {
             house = ds->getHouseData(i);
@@ -84,7 +82,22 @@ uint8_t *ProcessManager::processData(DataSet *ds, int *dlen) {
         VAR_TO_MEM_1BYTE_BIG_ENDIAN(weekday, p); *dlen += 1;
     }
 
-    // 향후 AGG_STATS 등 다른 집계 방식을 여기에 추가 가능
+    // 불쾌지수 기반 집계
+    else if (aggregationMode == AGG_COMFORT) {
+        int avg_temp = (int)tdata->getValue();
+        int avg_humid = (int)hdata->getValue();
+
+        // 불쾌지수 계산
+        double di = 0.81 * avg_temp + 0.01 * avg_humid * (0.99 * avg_temp - 14.3) + 46.3;
+        int discomfort_index = (int)(di + 0.5);  // 반올림
+
+        int weekday = tm->tm_wday;
+
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(avg_temp, p); *dlen += 1;
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(avg_humid, p); *dlen += 1;
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(discomfort_index, p); *dlen += 1;
+        VAR_TO_MEM_1BYTE_BIG_ENDIAN(weekday, p); *dlen += 1;
+    }
 
     return ret;
 }
