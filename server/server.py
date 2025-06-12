@@ -11,9 +11,14 @@ OPCODE_WAIT = 2
 OPCODE_DONE = 3
 OPCODE_QUIT = 4
 
+
 class Server:
-    def __init__(self, name, algorithm, dimension, index, port, caddr, cport, ntrain, ntest):
-        logging.info("[*] Initializing the server module to receive data from the edge device")
+    def __init__(
+        self, name, algorithm, dimension, index, port, caddr, cport, ntrain, ntest
+    ):
+        logging.info(
+            "[*] Initializing the server module to receive data from the edge device"
+        )
         self.name = name
         self.algorithm = algorithm
         self.dimension = dimension
@@ -37,9 +42,9 @@ class Server:
         self.ai.connect((self.caddr, self.cport))
         url = "http://{}:{}/{}".format(self.caddr, self.cport, self.name)
         request = {}
-        request['algorithm'] = self.algorithm
-        request['dimension'] = self.dimension
-        request['index'] = self.index
+        request["algorithm"] = self.algorithm
+        request["dimension"] = self.dimension
+        request["index"] = self.index
         js = json.dumps(request)
         logging.debug("[*] To be sent to the AI module: {}".format(js))
         result = requests.post(url, json=js)
@@ -68,7 +73,9 @@ class Server:
 
         while True:
             client, info = self.socket.accept()
-            logging.info("[*] Server accept the connection from {}:{}".format(info[0], info[1]))
+            logging.info(
+                "[*] Server accept the connection from {}:{}".format(info[0], info[1])
+            )
 
             client_handle = threading.Thread(target=self.handler, args=(client,))
             client_handle.start()
@@ -108,32 +115,38 @@ class Server:
             if len(buf) != 5:
                 logging.error("Vector type 1 expects 5 bytes, got {}".format(len(buf)))
                 return
-            
+
             temp = int.from_bytes(buf[0:1], byteorder="big", signed=True)
             humid = int.from_bytes(buf[1:2], byteorder="big", signed=True)
             power = int.from_bytes(buf[2:4], byteorder="big", signed=True)
             month = int.from_bytes(buf[4:5], byteorder="big", signed=True)
 
             lst = [temp, humid, power, month]
-            logging.info("[Vector Type 1 - AGG_AVG] [temp, humid, power, month] = {}".format(lst))
-            
+            logging.info(
+                "[Vector Type 1 - AGG_AVG] [temp, humid, power, month] = {}".format(lst)
+            )
+
         elif vector_type == 2:  # AGG_CUSTOM
             if len(buf) != 4:
                 logging.error("Vector type 2 expects 4 bytes, got {}".format(len(buf)))
                 return
-                
+
             max_power = int.from_bytes(buf[0:2], byteorder="big", signed=False)
             humid_bucket = int.from_bytes(buf[2:3], byteorder="big", signed=False)
             weekday = int.from_bytes(buf[3:4], byteorder="big", signed=False)
-            
+
             lst = [max_power, humid_bucket, weekday]
-            logging.info("[Vector Type 2 - AGG_CUSTOM] [max_power, humid_bucket, weekday] = {}".format(lst))
-            
+            logging.info(
+                "[Vector Type 2 - AGG_CUSTOM] [max_power, humid_bucket, weekday] = {}".format(
+                    lst
+                )
+            )
+
         elif vector_type == 3:  # AGG_COMFORT
             if len(buf) != 6:
                 logging.error("Vector type 3 expects 6 bytes, got {}".format(len(buf)))
                 return
-                
+
             temp = int.from_bytes(buf[0:1], byteorder="big", signed=True)
             humid = int.from_bytes(buf[1:2], byteorder="big", signed=True)
             discomfort_index = int.from_bytes(buf[2:3], byteorder="big", signed=True)
@@ -141,14 +154,17 @@ class Server:
             power = int.from_bytes(buf[4:6], byteorder="big", signed=True)
 
             lst = [temp, humid, discomfort_index, weekday, power]
-            logging.info("[Vector Type 3 - AGG_COMFORT] [temp, humid, discomfort_index, weekday, avg_power] = {}".format(lst))
-            
+            logging.info(
+                "[Vector Type 3 - AGG_COMFORT] [temp, humid, discomfort_index, weekday, avg_power] = {}".format(
+                    lst
+                )
+            )
+
         else:
             logging.error("Unknown vector type: {}".format(vector_type))
             return
 
         self.send_instance(lst, is_training)
-
 
     # TODO: You should implement your own protocol in this function
     # The following implementation is just a simple example
@@ -159,22 +175,24 @@ class Server:
         url = "http://{}:{}/{}/training".format(self.caddr, self.cport, self.name)
 
         while True:
-            # opcode (1 byte): 
+            # opcode (1 byte):
             rbuf = client.recv(1)
             opcode = int.from_bytes(rbuf, "big")
             logging.debug("[*] opcode: {}".format(opcode))
 
             if opcode == OPCODE_DATA:
                 logging.info("[*] data report from the edge")
-                
+
                 # Step 1: Read vector type (1 byte)
                 vector_type_buf = client.recv(1)
                 if len(vector_type_buf) == 0:
                     logging.error("No vector type received")
                     break
-                vector_type = int.from_bytes(vector_type_buf, byteorder="big", signed=False)
+                vector_type = int.from_bytes(
+                    vector_type_buf, byteorder="big", signed=False
+                )
                 logging.debug("[*] vector type: {}".format(vector_type))
-                
+
                 # Step 2: Read data based on vector type
                 if vector_type == 1:  # AGG_AVG: 5 bytes
                     data_length = 5
@@ -185,13 +203,19 @@ class Server:
                 else:
                     logging.error("[*] Unknown vector type: {}".format(vector_type))
                     break
-                
+
                 rbuf = client.recv(data_length)
                 if len(rbuf) != data_length:
-                    logging.error("[*] Expected {} bytes, got {}".format(data_length, len(rbuf)))
+                    logging.error(
+                        "[*] Expected {} bytes, got {}".format(data_length, len(rbuf))
+                    )
                     break
-                    
-                logging.debug("[*] received {}-byte data for vector type {}: {}".format(len(rbuf), vector_type, rbuf))
+
+                logging.debug(
+                    "[*] received {}-byte data for vector type {}: {}".format(
+                        len(rbuf), vector_type, rbuf
+                    )
+                )
                 self.parse_data(rbuf, True, vector_type)
             else:
                 logging.error("[*] invalid opcode")
@@ -213,7 +237,7 @@ class Server:
         result = requests.post(url)
         response = json.loads(result.content)
         logging.debug("[*] return: {}".format(response["opcode"]))
-    
+
         ntest = self.ntest
         url = "http://{}:{}/{}/testing".format(self.caddr, self.cport, self.name)
         opcode = OPCODE_DONE
@@ -221,22 +245,24 @@ class Server:
         client.send(int.to_bytes(opcode, 1, "big"))
 
         while ntest > 0:
-            # opcode (1 byte): 
+            # opcode (1 byte):
             rbuf = client.recv(1)
             opcode = int.from_bytes(rbuf, "big")
             logging.debug("[*] opcode: {}".format(opcode))
 
             if opcode == OPCODE_DATA:
                 logging.info("[*] data report from the edge")
-                
+
                 # Step 1: Read vector type (1 byte)
                 vector_type_buf = client.recv(1)
                 if len(vector_type_buf) == 0:
                     logging.error("No vector type received")
                     break
-                vector_type = int.from_bytes(vector_type_buf, byteorder="big", signed=False)
+                vector_type = int.from_bytes(
+                    vector_type_buf, byteorder="big", signed=False
+                )
                 logging.debug("[*] vector type: {}".format(vector_type))
-                
+
                 # Step 2: Read data based on vector type
                 if vector_type == 1:  # AGG_AVG: 5 bytes
                     data_length = 5
@@ -247,13 +273,19 @@ class Server:
                 else:
                     logging.error("[*] Unknown vector type: {}".format(vector_type))
                     break
-                
+
                 rbuf = client.recv(data_length)
                 if len(rbuf) != data_length:
-                    logging.error("[*] Expected {} bytes, got {}".format(data_length, len(rbuf)))
+                    logging.error(
+                        "[*] Expected {} bytes, got {}".format(data_length, len(rbuf))
+                    )
                     break
-                    
-                logging.debug("[*] received {}-byte data for vector type {}: {}".format(len(rbuf), vector_type, rbuf))
+
+                logging.debug(
+                    "[*] received {}-byte data for vector type {}: {}".format(
+                        len(rbuf), vector_type, rbuf
+                    )
+                )
                 self.parse_data(rbuf, False, vector_type)
             else:
                 logging.error("[*] invalid opcode")
@@ -300,31 +332,117 @@ class Server:
         logging.info("   correct predictions: {}".format(result["correct"]))
         logging.info("   incorrect predictions: {}".format(result["incorrect"]))
         logging.info("   accuracy: {}%".format(result["accuracy"]))
+        logging.info("   accuracy: {}%".format(result["accuracy"]))
+
 
 def command_line_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-a", "--algorithm", metavar="<AI algorithm to be used>", help="AI algorithm to be used", type=str, required=True)
-    parser.add_argument("-d", "--dimension", metavar="<Dimension of each instance>", help="Dimension of each instance", type=int, default=1)
-    parser.add_argument("-b", "--caddr", metavar="<AI module's IP address>", help="AI module's IP address", type=str, required=True)
-    parser.add_argument("-c", "--cport", metavar="<AI module's listening port>", help="AI module's listening port", type=int, required=True)
-    parser.add_argument("-p", "--lport", metavar="<server's listening port>", help="Server's listening port", type=int, required=True)
-    parser.add_argument("-n", "--name", metavar="<model name>", help="Name of the model", type=str, default="model")
-    parser.add_argument("-x", "--ntrain", metavar="<number of instances for training>", help="Number of instances for training", type=int, default=365)
-    parser.add_argument("-y", "--ntest", metavar="<number of instances for testing>", help="Number of instances for testing", type=int, default=365)
-    parser.add_argument("-z", "--index", metavar="<the index number for the power value>", help="Index number for the power value", type=int, default=0)
-    parser.add_argument("-l", "--log", metavar="<log level (DEBUG/INFO/WARNING/ERROR/CRITICAL)>", help="Log level (DEBUG/INFO/WARNING/ERROR/CRITICAL)", type=str, default="INFO")
+    parser.add_argument(
+        "-a",
+        "--algorithm",
+        metavar="<AI algorithm to be used>",
+        help="AI algorithm to be used",
+        type=str,
+        required=True,
+    )
+    parser.add_argument(
+        "-d",
+        "--dimension",
+        metavar="<Dimension of each instance>",
+        help="Dimension of each instance",
+        type=int,
+        default=1,
+    )
+    parser.add_argument(
+        "-b",
+        "--caddr",
+        metavar="<AI module's IP address>",
+        help="AI module's IP address",
+        type=str,
+        required=True,
+    )
+    parser.add_argument(
+        "-c",
+        "--cport",
+        metavar="<AI module's listening port>",
+        help="AI module's listening port",
+        type=int,
+        required=True,
+    )
+    parser.add_argument(
+        "-p",
+        "--lport",
+        metavar="<server's listening port>",
+        help="Server's listening port",
+        type=int,
+        required=True,
+    )
+    parser.add_argument(
+        "-n",
+        "--name",
+        metavar="<model name>",
+        help="Name of the model",
+        type=str,
+        default="model",
+    )
+    parser.add_argument(
+        "-x",
+        "--ntrain",
+        metavar="<number of instances for training>",
+        help="Number of instances for training",
+        type=int,
+        default=365,
+    )
+    parser.add_argument(
+        "-y",
+        "--ntest",
+        metavar="<number of instances for testing>",
+        help="Number of instances for testing",
+        type=int,
+        default=365,
+    )
+    parser.add_argument(
+        "-z",
+        "--index",
+        metavar="<the index number for the power value>",
+        help="Index number for the power value",
+        type=int,
+        default=0,
+    )
+    parser.add_argument(
+        "-l",
+        "--log",
+        metavar="<log level (DEBUG/INFO/WARNING/ERROR/CRITICAL)>",
+        help="Log level (DEBUG/INFO/WARNING/ERROR/CRITICAL)",
+        type=str,
+        default="INFO",
+    )
     args = parser.parse_args()
     return args
+
 
 def main():
     args = command_line_args()
     logging.basicConfig(level=args.log)
 
     if args.ntrain <= 0 or args.ntest <= 0:
-        logging.error("Number of instances for training or testing should be larger than 0")
+        logging.error(
+            "Number of instances for training or testing should be larger than 0"
+        )
         sys.exit(1)
 
-    Server(args.name, args.algorithm, args.dimension, args.index, args.lport, args.caddr, args.cport, args.ntrain, args.ntest)
+    Server(
+        args.name,
+        args.algorithm,
+        args.dimension,
+        args.index,
+        args.lport,
+        args.caddr,
+        args.cport,
+        args.ntrain,
+        args.ntest,
+    )
+
 
 if __name__ == "__main__":
     main()

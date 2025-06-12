@@ -5,27 +5,19 @@
 #include <ctime>
 #include <string>
 #include "info.h"
+#include "sensor_data.h"
 
-class PowerData
+class PowerData : public BaseSensorData
 {
-  private:
-    time_t timestamp;
-    double avg;
-    string unit;
+private:
     PowerData *next;
-  public:
-    PowerData(time_t timestamp, double avg);
 
+public:
+    PowerData(time_t timestamp, double avg);
+    
+    // Next pointer management
     void setNext(PowerData *data);
     PowerData *getNext();
-
-    void setValue(double value);
-    double getValue();
-
-    void setTimestamp(time_t timestamp);
-    time_t getTimestamp();
-
-    string getUnit();
 };
 
 #endif /* __POWER_DATA_H__ */

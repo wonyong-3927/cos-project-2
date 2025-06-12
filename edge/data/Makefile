@@ -1,15 +1,13 @@
 CC=g++
+CXXFLAGS=-std=c++11 -Wall
 SRCS=$(wildcard *.cpp)
 OBJS=$(SRCS:.cpp=.o)
 
-all: edge
+all: $(OBJS)
 
-edge: $(OBJS)
-	$(CC) -o $@ $^
-
-%.o: %.c
-	$(CC) -c $< -fno-stack-protector
+%.o: %.cpp
+	$(CC) $(CXXFLAGS) -c $< -o $@
 	@echo "CC <= $<"
 
 clean:
-	$(RM) edge $(OBJS) 
+	$(RM) $(OBJS)

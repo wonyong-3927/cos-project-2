@@ -10,7 +10,7 @@
 #include "opcode.h"
 using namespace std;
 
-NetworkManager::NetworkManager() 
+NetworkManager::NetworkManager()
 {
   this->sock = -1;
   this->addr = NULL;
@@ -46,28 +46,28 @@ int NetworkManager::getPort()
 
 int NetworkManager::init()
 {
-	struct sockaddr_in serv_addr;
+  struct sockaddr_in serv_addr;
 
-	this->sock = socket(PF_INET, SOCK_STREAM, 0);
-	if (this->sock == FAILURE)
+  this->sock = socket(PF_INET, SOCK_STREAM, 0);
+  if (this->sock == FAILURE)
   {
     cout << "[*] Error: socket() error" << endl;
     cout << "[*] Please try again" << endl;
     exit(1);
   }
 
-	memset(&serv_addr, 0, sizeof(serv_addr));
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_addr.s_addr = inet_addr(this->addr);
-	serv_addr.sin_port = htons(this->port);
+  memset(&serv_addr, 0, sizeof(serv_addr));
+  serv_addr.sin_family = AF_INET;
+  serv_addr.sin_addr.s_addr = inet_addr(this->addr);
+  serv_addr.sin_port = htons(this->port);
 
-	if (connect(this->sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == FAILURE)
+  if (connect(this->sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == FAILURE)
   {
     cout << "[*] Error: connect() error" << endl;
     cout << "[*] Please try again" << endl;
     exit(1);
   }
-	
+
   cout << "[*] Connected to " << this->addr << ":" << this->port << endl;
 
   return sock;
@@ -81,10 +81,13 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
   uint8_t vector_type;
 
   sock = this->sock;
-  
+
+  // Step 1: Send opcode (OPCODE_DATA)
+
   // Step 1: Send opcode (OPCODE_DATA)
   opcode = OPCODE_DATA;
-  tbs = 1; offset = 0;
+  tbs = 1;
+  offset = 0;
   while (offset < tbs)
   {
     sent = write(sock, &opcode + offset, tbs - offset);
@@ -96,7 +99,8 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
   // Step 2: Extract vector type directly from first byte of data
   vector_type = data[0];
 
-  tbs = 1; offset = 0;
+  tbs = 1;
+  offset = 0;
   while (offset < tbs)
   {
     sent = write(sock, &vector_type + offset, tbs - offset);
@@ -106,7 +110,8 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
   assert(offset == tbs);
 
   // Step 3: Send actual data (excluding the first byte which already contains vector_type)
-  tbs = dlen - 1; offset = 0;
+  tbs = dlen - 1;
+  offset = 0;
   while (offset < tbs)
   {
     sent = write(sock, data + 1 + offset, tbs - offset);
@@ -118,9 +123,8 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
   return 0;
 }
 
-
 // TODO: Please revise or implement this function as you want. You can also remove this function if it is not needed
-uint8_t NetworkManager::receiveCommand() 
+uint8_t NetworkManager::receiveCommand()
 {
   int sock;
   uint8_t opcode;
@@ -132,7 +136,7 @@ uint8_t NetworkManager::receiveCommand()
   while (opcode == OPCODE_WAIT)
     read(sock, &opcode, 1);
 
-  assert(opcode == OPCODE_DONE || opcode == OPCODE_QUIT) ;
+  assert(opcode == OPCODE_DONE || opcode == OPCODE_QUIT);
 
   return opcode;
 }
