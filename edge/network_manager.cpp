@@ -78,13 +78,13 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
 {
   int sock, tbs, sent, offset, num, jlen;
   unsigned char opcode;
+  uint8_t vector_type;
   uint8_t n[4];
   uint8_t *p;
 
   sock = this->sock;
-  // Example) data (processed by ProcessManager) consists of:
-  // Example) minimum temperature (1 byte) || minimum humidity (1 byte) || minimum power (2 bytes) || month (1 byte)
-  // Example) edge -> server: opcode (OPCODE_DATA, 1 byte)
+  
+  // Step 1: Send opcode (OPCODE_DATA)
   opcode = OPCODE_DATA;
   tbs = 1; offset = 0;
   while (offset < tbs)
@@ -95,8 +95,38 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
   }
   assert(offset == tbs);
 
-  // Example) edge -> server: temperature (1 byte) || humidity (1 byte) || power (2 bytes) || month (1 byte)
-  tbs = 5; offset = 0;
+  // Step 2: Send vector type (1 byte)
+  // Vector types:
+  // 1 = AGG_AVG: [temp(1), humid(1), power(2), month(1)] = 5 bytes
+  // 2 = AGG_CUSTOM: [max_power(2), humid_bucket(1), weekday(1)] = 4 bytes  
+  // 3 = AGG_COMFORT: [temp(1), humid(1), discomfort_index(1), weekday(1)] = 4 bytes
+  if (dlen == 5) {
+    vector_type = 1;  // AGG_AVG
+  } else if (dlen == 4) {
+    // Need to distinguish between AGG_CUSTOM and AGG_COMFORT
+    // AGG_CUSTOM starts with 2-byte max_power (typically 200-300)
+    // AGG_COMFORT starts with 1-byte temp (typically -20 to 50)
+    uint16_t first_two_bytes = (data[0] << 8) | data[1];
+    if (first_two_bytes > 100 && first_two_bytes < 1000) {
+      vector_type = 2;  // AGG_CUSTOM
+    } else {
+      vector_type = 3;  // AGG_COMFORT
+    }
+  } else {
+    vector_type = 0;  // Unknown
+  }
+  
+  tbs = 1; offset = 0;
+  while (offset < tbs)
+  {
+    sent = write(sock, &vector_type + offset, tbs - offset);
+    if (sent > 0)
+      offset += sent;
+  }
+  assert(offset == tbs);
+
+  // Step 3: Send actual data
+  tbs = dlen; offset = 0;
   while (offset < tbs)
   {
     sent = write(sock, data + offset, tbs - offset);

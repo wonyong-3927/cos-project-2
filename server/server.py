@@ -97,14 +97,54 @@ class Server:
             logging.error("unknown response")
             sys.exit(1)
 
-    def parse_data(self, buf, is_training):
-        temp = int.from_bytes(buf[0:1], byteorder="big", signed=True)
-        humid = int.from_bytes(buf[1:2], byteorder="big", signed=True)
-        power = int.from_bytes(buf[2:4], byteorder="big", signed=True)
-        month = int.from_bytes(buf[4:5], byteorder="big", signed=True)
+    def parse_data(self, buf, is_training, vector_type):
+        """
+        Parse data based on vector type according to the protocol:
+        Vector Type 1 (AGG_AVG): [temp(1), humid(1), power(2), month(1)] = 5 bytes
+        Vector Type 2 (AGG_CUSTOM): [max_power(2), humid_bucket(1), weekday(1)] = 4 bytes
+        Vector Type 3 (AGG_COMFORT): [temp(1), humid(1), discomfort_index(1), weekday(1)] = 4 bytes
+        """
+        if vector_type == 1:  # AGG_AVG
+            if len(buf) != 5:
+                logging.error("Vector type 1 expects 5 bytes, got {}".format(len(buf)))
+                return
+            
+            temp = int.from_bytes(buf[0:1], byteorder="big", signed=True)
+            humid = int.from_bytes(buf[1:2], byteorder="big", signed=True)
+            power = int.from_bytes(buf[2:4], byteorder="big", signed=True)
+            month = int.from_bytes(buf[4:5], byteorder="big", signed=True)
 
-        lst = [temp, humid, power, month]
-        logging.info("[temp, humid, power, month] = {}".format(lst))
+            lst = [temp, humid, power, month]
+            logging.info("[Vector Type 1 - AGG_AVG] [temp, humid, power, month] = {}".format(lst))
+            
+        elif vector_type == 2:  # AGG_CUSTOM
+            if len(buf) != 4:
+                logging.error("Vector type 2 expects 4 bytes, got {}".format(len(buf)))
+                return
+                
+            max_power = int.from_bytes(buf[0:2], byteorder="big", signed=False)
+            humid_bucket = int.from_bytes(buf[2:3], byteorder="big", signed=False)
+            weekday = int.from_bytes(buf[3:4], byteorder="big", signed=False)
+            
+            lst = [max_power, humid_bucket, weekday]
+            logging.info("[Vector Type 2 - AGG_CUSTOM] [max_power, humid_bucket, weekday] = {}".format(lst))
+            
+        elif vector_type == 3:  # AGG_COMFORT
+            if len(buf) != 4:
+                logging.error("Vector type 3 expects 4 bytes, got {}".format(len(buf)))
+                return
+                
+            temp = int.from_bytes(buf[0:1], byteorder="big", signed=True)
+            humid = int.from_bytes(buf[1:2], byteorder="big", signed=True)
+            discomfort_index = int.from_bytes(buf[2:3], byteorder="big", signed=True)
+            weekday = int.from_bytes(buf[3:4], byteorder="big", signed=True)
+
+            lst = [temp, humid, discomfort_index, weekday]
+            logging.info("[Vector Type 3 - AGG_COMFORT] [temp, humid, discomfort_index, weekday] = {}".format(lst))
+            
+        else:
+            logging.error("Unknown vector type: {}".format(vector_type))
+            return
 
         self.send_instance(lst, is_training)
 
@@ -125,9 +165,33 @@ class Server:
 
             if opcode == OPCODE_DATA:
                 logging.info("[*] data report from the edge")
-                rbuf = client.recv(5)
-                logging.debug("[*] received buf: {}".format(rbuf))
-                self.parse_data(rbuf, True)
+                
+                # Step 1: Read vector type (1 byte)
+                vector_type_buf = client.recv(1)
+                if len(vector_type_buf) == 0:
+                    logging.error("No vector type received")
+                    break
+                vector_type = int.from_bytes(vector_type_buf, byteorder="big", signed=False)
+                logging.debug("[*] vector type: {}".format(vector_type))
+                
+                # Step 2: Read data based on vector type
+                if vector_type == 1:  # AGG_AVG: 5 bytes
+                    data_length = 5
+                elif vector_type == 2:  # AGG_CUSTOM: 4 bytes
+                    data_length = 4
+                elif vector_type == 3:  # AGG_COMFORT: 4 bytes
+                    data_length = 4
+                else:
+                    logging.error("[*] Unknown vector type: {}".format(vector_type))
+                    break
+                
+                rbuf = client.recv(data_length)
+                if len(rbuf) != data_length:
+                    logging.error("[*] Expected {} bytes, got {}".format(data_length, len(rbuf)))
+                    break
+                    
+                logging.debug("[*] received {}-byte data for vector type {}: {}".format(len(rbuf), vector_type, rbuf))
+                self.parse_data(rbuf, True, vector_type)
             else:
                 logging.error("[*] invalid opcode")
                 logging.error("[*] please try again")
@@ -163,9 +227,33 @@ class Server:
 
             if opcode == OPCODE_DATA:
                 logging.info("[*] data report from the edge")
-                rbuf = client.recv(5)
-                logging.debug("[*] received buf: {}".format(rbuf))
-                self.parse_data(rbuf, False)
+                
+                # Step 1: Read vector type (1 byte)
+                vector_type_buf = client.recv(1)
+                if len(vector_type_buf) == 0:
+                    logging.error("No vector type received")
+                    break
+                vector_type = int.from_bytes(vector_type_buf, byteorder="big", signed=False)
+                logging.debug("[*] vector type: {}".format(vector_type))
+                
+                # Step 2: Read data based on vector type
+                if vector_type == 1:  # AGG_AVG: 5 bytes
+                    data_length = 5
+                elif vector_type == 2:  # AGG_CUSTOM: 4 bytes
+                    data_length = 4
+                elif vector_type == 3:  # AGG_COMFORT: 4 bytes
+                    data_length = 4
+                else:
+                    logging.error("[*] Unknown vector type: {}".format(vector_type))
+                    break
+                
+                rbuf = client.recv(data_length)
+                if len(rbuf) != data_length:
+                    logging.error("[*] Expected {} bytes, got {}".format(data_length, len(rbuf)))
+                    break
+                    
+                logging.debug("[*] received {}-byte data for vector type {}: {}".format(len(rbuf), vector_type, rbuf))
+                self.parse_data(rbuf, False, vector_type)
             else:
                 logging.error("[*] invalid opcode")
                 logging.error("[*] please try again")
@@ -210,7 +298,7 @@ class Server:
         logging.debug("   prediction: {}".format(result["prediction"]))
         logging.info("   correct predictions: {}".format(result["correct"]))
         logging.info("   incorrect predictions: {}".format(result["incorrect"]))
-        logging.info("   accuracy: {}\%".format(result["accuracy"]))
+        logging.info("   accuracy: {}%".format(result["accuracy"]))
 
 def command_line_args():
     parser = argparse.ArgumentParser()

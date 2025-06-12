@@ -1,0 +1,1200 @@
+Debug Info (AGG_COMFORT):
+  Timestamp: 1609459200
+  Year: 2021
+  Month: 1
+  Day: 1
+  Weekday: 5
+  avg_temp: -4
+  avg_humid: 64
+  discomfort_index: 31
+  Final data length: 4
+Print buffer:
+  >> fc 40 1f 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1609545600
+  Year: 2021
+  Month: 1
+  Day: 2
+  Weekday: 6
+  avg_temp: -4
+  avg_humid: 38
+  discomfort_index: 36
+  Final data length: 4
+Print buffer:
+  >> fc 26 24 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1609632000
+  Year: 2021
+  Month: 1
+  Day: 3
+  Weekday: 0
+  avg_temp: -5
+  avg_humid: 44
+  discomfort_index: 34
+  Final data length: 4
+Print buffer:
+  >> fb 2c 22 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1609718400
+  Year: 2021
+  Month: 1
+  Day: 4
+  Weekday: 1
+  avg_temp: -3
+  avg_humid: 48
+  discomfort_index: 36
+  Final data length: 4
+Print buffer:
+  >> fd 30 24 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1609804800
+  Year: 2021
+  Month: 1
+  Day: 5
+  Weekday: 2
+  avg_temp: -4
+  avg_humid: 53
+  discomfort_index: 33
+  Final data length: 4
+Print buffer:
+  >> fc 35 21 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1609891200
+  Year: 2021
+  Month: 1
+  Day: 6
+  Weekday: 3
+  avg_temp: -7
+  avg_humid: 53
+  discomfort_index: 29
+  Final data length: 4
+Print buffer:
+  >> f9 35 1d 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1609977600
+  Year: 2021
+  Month: 1
+  Day: 7
+  Weekday: 4
+  avg_temp: -14
+  avg_humid: 50
+  discomfort_index: 21
+  Final data length: 4
+Print buffer:
+  >> f2 32 15 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610064000
+  Year: 2021
+  Month: 1
+  Day: 8
+  Weekday: 5
+  avg_temp: -14
+  avg_humid: 44
+  discomfort_index: 23
+  Final data length: 4
+Print buffer:
+  >> f2 2c 17 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610150400
+  Year: 2021
+  Month: 1
+  Day: 9
+  Weekday: 6
+  avg_temp: -12
+  avg_humid: 44
+  discomfort_index: 25
+  Final data length: 4
+Print buffer:
+  >> f4 2c 19 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610236800
+  Year: 2021
+  Month: 1
+  Day: 10
+  Weekday: 0
+  avg_temp: -7
+  avg_humid: 53
+  discomfort_index: 29
+  Final data length: 4
+Print buffer:
+  >> f9 35 1d 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610323200
+  Year: 2021
+  Month: 1
+  Day: 11
+  Weekday: 1
+  avg_temp: -6
+  avg_humid: 62
+  discomfort_index: 29
+  Final data length: 4
+Print buffer:
+  >> fa 3e 1d 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610409600
+  Year: 2021
+  Month: 1
+  Day: 12
+  Weekday: 2
+  avg_temp: -4
+  avg_humid: 77
+  discomfort_index: 29
+  Final data length: 4
+Print buffer:
+  >> fc 4d 1d 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610496000
+  Year: 2021
+  Month: 1
+  Day: 13
+  Weekday: 3
+  avg_temp: 1
+  avg_humid: 82
+  discomfort_index: 36
+  Final data length: 4
+Print buffer:
+  >> 01 52 24 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610582400
+  Year: 2021
+  Month: 1
+  Day: 14
+  Weekday: 4
+  avg_temp: 1
+  avg_humid: 47
+  discomfort_index: 41
+  Final data length: 4
+Print buffer:
+  >> 01 2f 29 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610668800
+  Year: 2021
+  Month: 1
+  Day: 15
+  Weekday: 5
+  avg_temp: 4
+  avg_humid: 65
+  discomfort_index: 43
+  Final data length: 4
+Print buffer:
+  >> 04 41 2b 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610755200
+  Year: 2021
+  Month: 1
+  Day: 16
+  Weekday: 6
+  avg_temp: -4
+  avg_humid: 58
+  discomfort_index: 32
+  Final data length: 4
+Print buffer:
+  >> fc 3a 20 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610841600
+  Year: 2021
+  Month: 1
+  Day: 17
+  Weekday: 0
+  avg_temp: -5
+  avg_humid: 55
+  discomfort_index: 32
+  Final data length: 4
+Print buffer:
+  >> fb 37 20 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1610928000
+  Year: 2021
+  Month: 1
+  Day: 18
+  Weekday: 1
+  avg_temp: -3
+  avg_humid: 66
+  discomfort_index: 32
+  Final data length: 4
+Print buffer:
+  >> fd 42 20 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611014400
+  Year: 2021
+  Month: 1
+  Day: 19
+  Weekday: 2
+  avg_temp: -6
+  avg_humid: 38
+  discomfort_index: 34
+  Final data length: 4
+Print buffer:
+  >> fa 26 22 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611100800
+  Year: 2021
+  Month: 1
+  Day: 20
+  Weekday: 3
+  avg_temp: 0
+  avg_humid: 38
+  discomfort_index: 41
+  Final data length: 4
+Print buffer:
+  >> 00 26 29 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611187200
+  Year: 2021
+  Month: 1
+  Day: 21
+  Weekday: 4
+  avg_temp: 4
+  avg_humid: 59
+  discomfort_index: 43
+  Final data length: 4
+Print buffer:
+  >> 04 3b 2b 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611273600
+  Year: 2021
+  Month: 1
+  Day: 22
+  Weekday: 5
+  avg_temp: 5
+  avg_humid: 93
+  discomfort_index: 42
+  Final data length: 4
+Print buffer:
+  >> 05 5d 2a 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611360000
+  Year: 2021
+  Month: 1
+  Day: 23
+  Weekday: 6
+  avg_temp: 7
+  avg_humid: 67
+  discomfort_index: 47
+  Final data length: 4
+Print buffer:
+  >> 07 43 2f 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611446400
+  Year: 2021
+  Month: 1
+  Day: 24
+  Weekday: 0
+  avg_temp: 7
+  avg_humid: 62
+  discomfort_index: 47
+  Final data length: 4
+Print buffer:
+  >> 07 3e 2f 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611532800
+  Year: 2021
+  Month: 1
+  Day: 25
+  Weekday: 1
+  avg_temp: 7
+  avg_humid: 61
+  discomfort_index: 47
+  Final data length: 4
+Print buffer:
+  >> 07 3d 2f 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611619200
+  Year: 2021
+  Month: 1
+  Day: 26
+  Weekday: 2
+  avg_temp: 5
+  avg_humid: 79
+  discomfort_index: 43
+  Final data length: 4
+Print buffer:
+  >> 05 4f 2b 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611705600
+  Year: 2021
+  Month: 1
+  Day: 27
+  Weekday: 3
+  avg_temp: 1
+  avg_humid: 48
+  discomfort_index: 41
+  Final data length: 4
+Print buffer:
+  >> 01 30 29 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611792000
+  Year: 2021
+  Month: 1
+  Day: 28
+  Weekday: 4
+  avg_temp: -1
+  avg_humid: 53
+  discomfort_index: 37
+  Final data length: 4
+Print buffer:
+  >> ff 35 25 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611878400
+  Year: 2021
+  Month: 1
+  Day: 29
+  Weekday: 5
+  avg_temp: -8
+  avg_humid: 39
+  discomfort_index: 31
+  Final data length: 4
+Print buffer:
+  >> f8 27 1f 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1611964800
+  Year: 2021
+  Month: 1
+  Day: 30
+  Weekday: 6
+  avg_temp: -1
+  avg_humid: 58
+  discomfort_index: 37
+  Final data length: 4
+Print buffer:
+  >> ff 3a 25 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612051200
+  Year: 2021
+  Month: 1
+  Day: 31
+  Weekday: 0
+  avg_temp: 2
+  avg_humid: 57
+  discomfort_index: 41
+  Final data length: 4
+Print buffer:
+  >> 02 39 29 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612137600
+  Year: 2021
+  Month: 2
+  Day: 1
+  Weekday: 1
+  avg_temp: 5
+  avg_humid: 76
+  discomfort_index: 43
+  Final data length: 4
+Print buffer:
+  >> 05 4c 2b 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612224000
+  Year: 2021
+  Month: 2
+  Day: 2
+  Weekday: 2
+  avg_temp: -5
+  avg_humid: 44
+  discomfort_index: 34
+  Final data length: 4
+Print buffer:
+  >> fb 2c 22 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612310400
+  Year: 2021
+  Month: 2
+  Day: 3
+  Weekday: 3
+  avg_temp: -3
+  avg_humid: 61
+  discomfort_index: 33
+  Final data length: 4
+Print buffer:
+  >> fd 3d 21 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612396800
+  Year: 2021
+  Month: 2
+  Day: 4
+  Weekday: 4
+  avg_temp: -3
+  avg_humid: 50
+  discomfort_index: 35
+  Final data length: 4
+Print buffer:
+  >> fd 32 23 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612483200
+  Year: 2021
+  Month: 2
+  Day: 5
+  Weekday: 5
+  avg_temp: 0
+  avg_humid: 70
+  discomfort_index: 36
+  Final data length: 4
+Print buffer:
+  >> 00 46 24 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612569600
+  Year: 2021
+  Month: 2
+  Day: 6
+  Weekday: 6
+  avg_temp: 6
+  avg_humid: 79
+  discomfort_index: 45
+  Final data length: 4
+Print buffer:
+  >> 06 4f 2d 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612656000
+  Year: 2021
+  Month: 2
+  Day: 7
+  Weekday: 0
+  avg_temp: 4
+  avg_humid: 68
+  discomfort_index: 43
+  Final data length: 4
+Print buffer:
+  >> 04 44 2b 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612742400
+  Year: 2021
+  Month: 2
+  Day: 8
+  Weekday: 1
+  avg_temp: -2
+  avg_humid: 43
+  discomfort_index: 38
+  Final data length: 4
+Print buffer:
+  >> fe 2b 26 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612828800
+  Year: 2021
+  Month: 2
+  Day: 9
+  Weekday: 2
+  avg_temp: -1
+  avg_humid: 49
+  discomfort_index: 38
+  Final data length: 4
+Print buffer:
+  >> ff 31 26 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1612915200
+  Year: 2021
+  Month: 2
+  Day: 10
+  Weekday: 3
+  avg_temp: 3
+  avg_humid: 74
+  discomfort_index: 40
+  Final data length: 4
+Print buffer:
+  >> 03 4a 28 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613001600
+  Year: 2021
+  Month: 2
+  Day: 11
+  Weekday: 4
+  avg_temp: 5
+  avg_humid: 71
+  discomfort_index: 44
+  Final data length: 4
+Print buffer:
+  >> 05 47 2c 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613088000
+  Year: 2021
+  Month: 2
+  Day: 12
+  Weekday: 5
+  avg_temp: 6
+  avg_humid: 61
+  discomfort_index: 46
+  Final data length: 4
+Print buffer:
+  >> 06 3d 2e 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613174400
+  Year: 2021
+  Month: 2
+  Day: 13
+  Weekday: 6
+  avg_temp: 7
+  avg_humid: 50
+  discomfort_index: 48
+  Final data length: 4
+Print buffer:
+  >> 07 32 30 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613260800
+  Year: 2021
+  Month: 2
+  Day: 14
+  Weekday: 0
+  avg_temp: 9
+  avg_humid: 46
+  discomfort_index: 51
+  Final data length: 4
+Print buffer:
+  >> 09 2e 33 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613347200
+  Year: 2021
+  Month: 2
+  Day: 15
+  Weekday: 1
+  avg_temp: 2
+  avg_humid: 65
+  discomfort_index: 40
+  Final data length: 4
+Print buffer:
+  >> 02 41 28 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613433600
+  Year: 2021
+  Month: 2
+  Day: 16
+  Weekday: 2
+  avg_temp: -4
+  avg_humid: 60
+  discomfort_index: 32
+  Final data length: 4
+Print buffer:
+  >> fc 3c 20 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613520000
+  Year: 2021
+  Month: 2
+  Day: 17
+  Weekday: 3
+  avg_temp: -8
+  avg_humid: 44
+  discomfort_index: 30
+  Final data length: 4
+Print buffer:
+  >> f8 2c 1e 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613606400
+  Year: 2021
+  Month: 2
+  Day: 18
+  Weekday: 4
+  avg_temp: -5
+  avg_humid: 44
+  discomfort_index: 34
+  Final data length: 4
+Print buffer:
+  >> fb 2c 22 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613692800
+  Year: 2021
+  Month: 2
+  Day: 19
+  Weekday: 5
+  avg_temp: 0
+  avg_humid: 64
+  discomfort_index: 37
+  Final data length: 4
+Print buffer:
+  >> 00 40 25 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613779200
+  Year: 2021
+  Month: 2
+  Day: 20
+  Weekday: 6
+  avg_temp: 8
+  avg_humid: 60
+  discomfort_index: 49
+  Final data length: 4
+Print buffer:
+  >> 08 3c 31 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613865600
+  Year: 2021
+  Month: 2
+  Day: 21
+  Weekday: 0
+  avg_temp: 10
+  avg_humid: 66
+  discomfort_index: 51
+  Final data length: 4
+Print buffer:
+  >> 0a 42 33 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1613952000
+  Year: 2021
+  Month: 2
+  Day: 22
+  Weekday: 1
+  avg_temp: 8
+  avg_humid: 60
+  discomfort_index: 49
+  Final data length: 4
+Print buffer:
+  >> 08 3c 31 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614038400
+  Year: 2021
+  Month: 2
+  Day: 23
+  Weekday: 2
+  avg_temp: 0
+  avg_humid: 33
+  discomfort_index: 42
+  Final data length: 4
+Print buffer:
+  >> 00 21 2a 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614124800
+  Year: 2021
+  Month: 2
+  Day: 24
+  Weekday: 3
+  avg_temp: 2
+  avg_humid: 32
+  discomfort_index: 44
+  Final data length: 4
+Print buffer:
+  >> 02 20 2c 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614211200
+  Year: 2021
+  Month: 2
+  Day: 25
+  Weekday: 4
+  avg_temp: 4
+  avg_humid: 36
+  discomfort_index: 46
+  Final data length: 4
+Print buffer:
+  >> 04 24 2e 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614297600
+  Year: 2021
+  Month: 2
+  Day: 26
+  Weekday: 5
+  avg_temp: 8
+  avg_humid: 33
+  discomfort_index: 51
+  Final data length: 4
+Print buffer:
+  >> 08 21 33 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614384000
+  Year: 2021
+  Month: 2
+  Day: 27
+  Weekday: 6
+  avg_temp: 9
+  avg_humid: 48
+  discomfort_index: 51
+  Final data length: 4
+Print buffer:
+  >> 09 30 33 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614470400
+  Year: 2021
+  Month: 2
+  Day: 28
+  Weekday: 0
+  avg_temp: 7
+  avg_humid: 49
+  discomfort_index: 48
+  Final data length: 4
+Print buffer:
+  >> 07 31 30 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614556800
+  Year: 2021
+  Month: 3
+  Day: 1
+  Weekday: 1
+  avg_temp: 5
+  avg_humid: 89
+  discomfort_index: 42
+  Final data length: 4
+Print buffer:
+  >> 05 59 2a 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614643200
+  Year: 2021
+  Month: 3
+  Day: 2
+  Weekday: 2
+  avg_temp: 2
+  avg_humid: 75
+  discomfort_index: 39
+  Final data length: 4
+Print buffer:
+  >> 02 4b 27 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614729600
+  Year: 2021
+  Month: 3
+  Day: 3
+  Weekday: 3
+  avg_temp: 4
+  avg_humid: 65
+  discomfort_index: 43
+  Final data length: 4
+Print buffer:
+  >> 04 41 2b 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614816000
+  Year: 2021
+  Month: 3
+  Day: 4
+  Weekday: 4
+  avg_temp: 7
+  avg_humid: 62
+  discomfort_index: 47
+  Final data length: 4
+Print buffer:
+  >> 07 3e 2f 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614902400
+  Year: 2021
+  Month: 3
+  Day: 5
+  Weekday: 5
+  avg_temp: 9
+  avg_humid: 69
+  discomfort_index: 50
+  Final data length: 4
+Print buffer:
+  >> 09 45 32 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1614988800
+  Year: 2021
+  Month: 3
+  Day: 6
+  Weekday: 6
+  avg_temp: 6
+  avg_humid: 70
+  discomfort_index: 45
+  Final data length: 4
+Print buffer:
+  >> 06 46 2d 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615075200
+  Year: 2021
+  Month: 3
+  Day: 7
+  Weekday: 0
+  avg_temp: 6
+  avg_humid: 61
+  discomfort_index: 46
+  Final data length: 4
+Print buffer:
+  >> 06 3d 2e 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615161600
+  Year: 2021
+  Month: 3
+  Day: 8
+  Weekday: 1
+  avg_temp: 7
+  avg_humid: 59
+  discomfort_index: 48
+  Final data length: 4
+Print buffer:
+  >> 07 3b 30 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615248000
+  Year: 2021
+  Month: 3
+  Day: 9
+  Weekday: 2
+  avg_temp: 6
+  avg_humid: 56
+  discomfort_index: 46
+  Final data length: 4
+Print buffer:
+  >> 06 38 2e 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615334400
+  Year: 2021
+  Month: 3
+  Day: 10
+  Weekday: 3
+  avg_temp: 8
+  avg_humid: 62
+  discomfort_index: 49
+  Final data length: 4
+Print buffer:
+  >> 08 3e 31 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615420800
+  Year: 2021
+  Month: 3
+  Day: 11
+  Weekday: 4
+  avg_temp: 10
+  avg_humid: 52
+  discomfort_index: 52
+  Final data length: 4
+Print buffer:
+  >> 0a 34 34 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615507200
+  Year: 2021
+  Month: 3
+  Day: 12
+  Weekday: 5
+  avg_temp: 10
+  avg_humid: 55
+  discomfort_index: 52
+  Final data length: 4
+Print buffer:
+  >> 0a 37 34 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615593600
+  Year: 2021
+  Month: 3
+  Day: 13
+  Weekday: 6
+  avg_temp: 9
+  avg_humid: 62
+  discomfort_index: 50
+  Final data length: 4
+Print buffer:
+  >> 09 3e 32 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615680000
+  Year: 2021
+  Month: 3
+  Day: 14
+  Weekday: 0
+  avg_temp: 9
+  avg_humid: 71
+  discomfort_index: 50
+  Final data length: 4
+Print buffer:
+  >> 09 47 32 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615766400
+  Year: 2021
+  Month: 3
+  Day: 15
+  Weekday: 1
+  avg_temp: 10
+  avg_humid: 66
+  discomfort_index: 51
+  Final data length: 4
+Print buffer:
+  >> 0a 42 33 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615852800
+  Year: 2021
+  Month: 3
+  Day: 16
+  Weekday: 2
+  avg_temp: 8
+  avg_humid: 53
+  discomfort_index: 49
+  Final data length: 4
+Print buffer:
+  >> 08 35 31 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1615939200
+  Year: 2021
+  Month: 3
+  Day: 17
+  Weekday: 3
+  avg_temp: 8
+  avg_humid: 44
+  discomfort_index: 50
+  Final data length: 4
+Print buffer:
+  >> 08 2c 32 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616025600
+  Year: 2021
+  Month: 3
+  Day: 18
+  Weekday: 4
+  avg_temp: 11
+  avg_humid: 50
+  discomfort_index: 54
+  Final data length: 4
+Print buffer:
+  >> 0b 32 36 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616112000
+  Year: 2021
+  Month: 3
+  Day: 19
+  Weekday: 5
+  avg_temp: 15
+  avg_humid: 47
+  discomfort_index: 59
+  Final data length: 4
+Print buffer:
+  >> 0f 2f 3b 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616198400
+  Year: 2021
+  Month: 3
+  Day: 20
+  Weekday: 6
+  avg_temp: 10
+  avg_humid: 72
+  discomfort_index: 51
+  Final data length: 4
+Print buffer:
+  >> 0a 48 33 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616284800
+  Year: 2021
+  Month: 3
+  Day: 21
+  Weekday: 0
+  avg_temp: 5
+  avg_humid: 68
+  discomfort_index: 44
+  Final data length: 4
+Print buffer:
+  >> 05 44 2c 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616371200
+  Year: 2021
+  Month: 3
+  Day: 22
+  Weekday: 1
+  avg_temp: 6
+  avg_humid: 53
+  discomfort_index: 47
+  Final data length: 4
+Print buffer:
+  >> 06 35 2f 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616457600
+  Year: 2021
+  Month: 3
+  Day: 23
+  Weekday: 2
+  avg_temp: 8
+  avg_humid: 63
+  discomfort_index: 49
+  Final data length: 4
+Print buffer:
+  >> 08 3f 31 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616544000
+  Year: 2021
+  Month: 3
+  Day: 24
+  Weekday: 3
+  avg_temp: 10
+  avg_humid: 60
+  discomfort_index: 52
+  Final data length: 4
+Print buffer:
+  >> 0a 3c 34 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616630400
+  Year: 2021
+  Month: 3
+  Day: 25
+  Weekday: 4
+  avg_temp: 12
+  avg_humid: 67
+  discomfort_index: 54
+  Final data length: 4
+Print buffer:
+  >> 0c 43 36 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616716800
+  Year: 2021
+  Month: 3
+  Day: 26
+  Weekday: 5
+  avg_temp: 12
+  avg_humid: 60
+  discomfort_index: 55
+  Final data length: 4
+Print buffer:
+  >> 0c 3c 37 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616803200
+  Year: 2021
+  Month: 3
+  Day: 27
+  Weekday: 6
+  avg_temp: 11
+  avg_humid: 68
+  discomfort_index: 53
+  Final data length: 4
+Print buffer:
+  >> 0b 44 35 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616889600
+  Year: 2021
+  Month: 3
+  Day: 28
+  Weekday: 0
+  avg_temp: 9
+  avg_humid: 95
+  discomfort_index: 48
+  Final data length: 4
+Print buffer:
+  >> 09 5f 30 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1616976000
+  Year: 2021
+  Month: 3
+  Day: 29
+  Weekday: 1
+  avg_temp: 10
+  avg_humid: 63
+  discomfort_index: 52
+  Final data length: 4
+Print buffer:
+  >> 0a 3f 34 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617062400
+  Year: 2021
+  Month: 3
+  Day: 30
+  Weekday: 2
+  avg_temp: 10
+  avg_humid: 47
+  discomfort_index: 52
+  Final data length: 4
+Print buffer:
+  >> 0a 2f 34 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617148800
+  Year: 2021
+  Month: 3
+  Day: 31
+  Weekday: 3
+  avg_temp: 14
+  avg_humid: 40
+  discomfort_index: 57
+  Final data length: 4
+Print buffer:
+  >> 0e 28 39 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617235200
+  Year: 2021
+  Month: 4
+  Day: 1
+  Weekday: 4
+  avg_temp: 17
+  avg_humid: 33
+  discomfort_index: 61
+  Final data length: 4
+Print buffer:
+  >> 11 21 3d 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617321600
+  Year: 2021
+  Month: 4
+  Day: 2
+  Weekday: 5
+  avg_temp: 17
+  avg_humid: 35
+  discomfort_index: 61
+  Final data length: 4
+Print buffer:
+  >> 11 23 3d 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617408000
+  Year: 2021
+  Month: 4
+  Day: 3
+  Weekday: 6
+  avg_temp: 15
+  avg_humid: 78
+  discomfort_index: 59
+  Final data length: 4
+Print buffer:
+  >> 0f 4e 3b 06 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617494400
+  Year: 2021
+  Month: 4
+  Day: 4
+  Weekday: 0
+  avg_temp: 12
+  avg_humid: 67
+  discomfort_index: 54
+  Final data length: 4
+Print buffer:
+  >> 0c 43 36 00 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617580800
+  Year: 2021
+  Month: 4
+  Day: 5
+  Weekday: 1
+  avg_temp: 11
+  avg_humid: 47
+  discomfort_index: 54
+  Final data length: 4
+Print buffer:
+  >> 0b 2f 36 01 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617667200
+  Year: 2021
+  Month: 4
+  Day: 6
+  Weekday: 2
+  avg_temp: 13
+  avg_humid: 49
+  discomfort_index: 56
+  Final data length: 4
+Print buffer:
+  >> 0d 31 38 02 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617753600
+  Year: 2021
+  Month: 4
+  Day: 7
+  Weekday: 3
+  avg_temp: 14
+  avg_humid: 49
+  discomfort_index: 57
+  Final data length: 4
+Print buffer:
+  >> 0e 31 39 03 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617840000
+  Year: 2021
+  Month: 4
+  Day: 8
+  Weekday: 4
+  avg_temp: 13
+  avg_humid: 34
+  discomfort_index: 56
+  Final data length: 4
+Print buffer:
+  >> 0d 22 38 04 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1617926400
+  Year: 2021
+  Month: 4
+  Day: 9
+  Weekday: 5
+  avg_temp: 13
+  avg_humid: 38
+  discomfort_index: 56
+  Final data length: 4
+Print buffer:
+  >> 0d 26 38 05 
+Debug Info (AGG_COMFORT):
+  Timestamp: 1618012800
+  Year: 2021
+  Month: 4
+  Day: 10
+  Weekday: 6
+  avg_temp: 12
+  avg_humid: 48
+  discomfort_index: 55
+  Final data length: 4
+Print buffer:
+  >> 0c 30 37 06 
