@@ -103,14 +103,31 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
   if (dlen == 5) {
     vector_type = 1;  // AGG_AVG
   } else if (dlen == 4) {
-    // Need to distinguish between AGG_CUSTOM and AGG_COMFORT
-    // AGG_CUSTOM starts with 2-byte max_power (typically 200-300)
-    // AGG_COMFORT starts with 1-byte temp (typically -20 to 50)
-    uint16_t first_two_bytes = (data[0] << 8) | data[1];
-    if (first_two_bytes > 100 && first_two_bytes < 1000) {
+    // Improved detection logic: Check the third byte to distinguish vector types
+    // AGG_CUSTOM: [max_power(2), humid_bucket(0-2), weekday(0-6)]
+    // AGG_COMFORT: [temp(-20 to 50), humid(0-100), discomfort_index(15-100), weekday(0-6)]
+    
+    uint8_t third_byte = data[2];
+    uint8_t fourth_byte = data[3];
+    
+    // In AGG_CUSTOM, third byte is humid_bucket (0, 1, or 2)
+    // In AGG_COMFORT, third byte is discomfort_index (typically 15-100)
+    // Fourth byte is always weekday (0-6) in both cases
+    
+    if (third_byte <= 2 && fourth_byte <= 6) {
+      // Likely AGG_CUSTOM: humid_bucket is 0-2, weekday is 0-6
       vector_type = 2;  // AGG_CUSTOM
-    } else {
+    } else if (third_byte >= 15 && third_byte <= 100 && fourth_byte <= 6) {
+      // Likely AGG_COMFORT: discomfort_index is 15-100, weekday is 0-6
       vector_type = 3;  // AGG_COMFORT
+    } else {
+      // Fallback: use first two bytes method as backup
+      uint16_t first_two_bytes = (data[0] << 8) | data[1];
+      if (first_two_bytes >= 200 && first_two_bytes <= 500) {
+        vector_type = 2;  // AGG_CUSTOM (max_power range)
+      } else {
+        vector_type = 3;  // AGG_COMFORT (default for 4-byte vectors)
+      }
     }
   } else {
     vector_type = 0;  // Unknown

@@ -16,9 +16,9 @@ enum AggregationType {
 };
 
 // 사용할 집계 방식 선택
-// const AggregationType aggregationMode = AGG_AVG;  // 디버깅을 위해 AGG_COMFORT에서 변경
-// const AggregationType aggregationMode = AGG_COMFORT;
-const AggregationType aggregationMode = AGG_CUSTOM;  // 사용자 정의 집계 방식
+// const AggregationType aggregationMode = AGG_AVG;  // 디버깅을 위해 AGG_COMFORT에서 변경 dim=4, vec_type=3
+const AggregationType aggregationMode = AGG_COMFORT; dim = 4, vec_type=1
+// const AggregationType aggregationMode = AGG_CUSTOM;  // 사용자 정의 집계 방식 dim=3, vec_type=2
 
 ProcessManager::ProcessManager() {
     this->num = 0;
