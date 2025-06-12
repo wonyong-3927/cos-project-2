@@ -76,15 +76,13 @@ int NetworkManager::init()
 // TODO: You should revise the following code
 int NetworkManager::sendData(uint8_t *data, int dlen)
 {
-  int sock, tbs, sent, offset, num, jlen;
+  int sock, tbs, sent, offset;
   unsigned char opcode;
-  uint8_t n[4];
-  uint8_t *p;
+  uint8_t vector_type;
 
   sock = this->sock;
-  // Example) data (processed by ProcessManager) consists of:
-  // Example) minimum temperature (1 byte) || minimum humidity (1 byte) || minimum power (2 bytes) || month (1 byte)
-  // Example) edge -> server: opcode (OPCODE_DATA, 1 byte)
+  
+  // Step 1: Send opcode (OPCODE_DATA)
   opcode = OPCODE_DATA;
   tbs = 1; offset = 0;
   while (offset < tbs)
@@ -95,11 +93,23 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
   }
   assert(offset == tbs);
 
-  // Example) edge -> server: temperature (1 byte) || humidity (1 byte) || power (2 bytes) || month (1 byte)
-  tbs = 5; offset = 0;
+  // Step 2: Extract vector type directly from first byte of data
+  vector_type = data[0];
+
+  tbs = 1; offset = 0;
   while (offset < tbs)
   {
-    sent = write(sock, data + offset, tbs - offset);
+    sent = write(sock, &vector_type + offset, tbs - offset);
+    if (sent > 0)
+      offset += sent;
+  }
+  assert(offset == tbs);
+
+  // Step 3: Send actual data (excluding the first byte which already contains vector_type)
+  tbs = dlen - 1; offset = 0;
+  while (offset < tbs)
+  {
+    sent = write(sock, data + 1 + offset, tbs - offset);
     if (sent > 0)
       offset += sent;
   }
@@ -107,6 +117,7 @@ int NetworkManager::sendData(uint8_t *data, int dlen)
 
   return 0;
 }
+
 
 // TODO: Please revise or implement this function as you want. You can also remove this function if it is not needed
 uint8_t NetworkManager::receiveCommand() 

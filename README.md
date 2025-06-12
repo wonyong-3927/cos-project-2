@@ -28,6 +28,10 @@
 `cd ~/project/server`
 `python3 server.py --algorithm [algorithm] --dimension [dimension] --index [index of power values] --caddr 127.0.0.1 --cport [port number of AI module] --lport [port number for Server] --name [name of the model]`
 `e.g., python3 server.py --algorithm lstm --dimension 1 --index 0 --caddr 127.0.0.1 --cport 5556 --lport 5555 --name lstm`
+python3 server.py –a lstm –b 127.0.0.1 –c 5556 –d 4 –p 5555 –l DEBUG
+VT가 1일때 -d 4 -x 2
+VT가 2일때 -d 3 -x 0
+VT가 3일때 -d 5 -x 4
 
 3) Terminal 3: Edge device (Raspberry Pi)
 `cd ~/project/edge`
