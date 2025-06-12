@@ -41,19 +41,20 @@ Vector Type 2: [max_power(2), humid_bucket(1), weekday(1)] = 4 bytes
 
 #### 3. AGG_COMFORT Vector (4-dimensional)
 ```cpp
-Vector Type 3: [avg_temp(1), avg_humid(1), discomfort_index(1), weekday(1)] = 4 bytes
+Vector Type 3: [avg_temp(1), avg_humid(1), discomfort_index(1), weekday(1), avg_power(2)] = 6 bytes
 ```
 - **avg_temp**: Average temperature (1 byte, signed)
 - **avg_humid**: Average humidity (1 byte, signed)
 - **discomfort_index**: Calculated using formula: `0.81 * temp + 0.01 * humid * (0.99 * temp - 14.3) + 46.3`
 - **weekday**: Day of week
+- **avg_power**: Average power consumption (2 bytes, big-endian)
 
 ### Code Structure
 ```cpp
 enum AggregationType {
-    AGG_AVG = 0,      // Vector Type 1
-    AGG_CUSTOM = 1,   // Vector Type 2  
-    AGG_COMFORT = 2   // Vector Type 3
+    AGG_AVG = 1,      // Vector Type 1
+    AGG_CUSTOM = 2,   // Vector Type 2  
+    AGG_COMFORT = 3   // Vector Type 3
 };
 
 const AggregationType aggregationMode = AGG_CUSTOM; // Currently selected
@@ -84,20 +85,6 @@ Edge → Server: [opcode(1)] + [vector_type(1)] + [data(4~5 bytes)]
 | 2 | vector_type | 1=AGG_AVG, 2=AGG_CUSTOM, 3=AGG_COMFORT |
 | 3-N | data | Actual vector data based on type |
 
-#### Vector Type Auto-Detection (Edge Side)
-```cpp
-if (dlen == 5) {
-    vector_type = 1;  // AGG_AVG
-} else if (dlen == 4) {
-    uint16_t first_two_bytes = (data[0] << 8) | data[1];
-    if (first_two_bytes > 100 && first_two_bytes < 1000) {
-        vector_type = 2;  // AGG_CUSTOM (starts with max_power)
-    } else {
-        vector_type = 3;  // AGG_COMFORT (starts with temperature)
-    }
-}
-```
-
 #### Server-Side Parsing
 ```python
 def parse_data(self, buf, is_training, vector_type):
@@ -117,6 +104,7 @@ def parse_data(self, buf, is_training, vector_type):
         humid = int.from_bytes(buf[1:2], byteorder="big", signed=True)
         discomfort_index = int.from_bytes(buf[2:3], byteorder="big", signed=True)
         weekday = int.from_bytes(buf[3:4], byteorder="big", signed=True)
+        power = int.from_bytes(buf[4:6], byteorder="big", signed=True)
 ```
 
 ### Protocol Benefits
