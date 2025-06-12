@@ -103,8 +103,7 @@ uint8_t *ProcessManager::processData(DataSet *ds, int *dlen)
                 max_power = tmp;
         }
         int avg_humid = (int)hdata->getValue();
-        int humid_bucket = (avg_humid < 30) ? 0 : (avg_humid < 60) ? 1
-                                                                   : 2;
+        int humid_bucket = (avg_humid < 30) ? 0 : (avg_humid < 60) ? 1 : 2;
         int weekday = tm->tm_wday;
 
         VAR_TO_MEM_2BYTES_BIG_ENDIAN(max_power, p);
